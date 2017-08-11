@@ -1,0 +1,22 @@
+
+spring:
+  application:
+    name: slugjar
+  profiles:
+    active: local
+server:
+  context-path: '/'
+  port: 8081
+
+---
+
+spring:
+  profiles: local
+db:
+  source: mongo
+  mongo:
+    host: localhost
+    database: slugjar
+    login: slugjar
+    password: slugjar
+    authDb: admin
