@@ -1,10 +1,14 @@
 package org.schlocknet.slugjar.config;
 
+import com.mongodb.MongoClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.core.MongoClientFactoryBean;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  * Primary database configuration class
@@ -12,12 +16,19 @@ import org.springframework.data.mongodb.core.MongoClientFactoryBean;
 @Configuration
 public class DatabaseConfig {
 
-  /** Access to envirnoment variable and properties */
+  /** Local logger */
+  private static Logger LOGGER = LoggerFactory.getLogger(DatabaseConfig.class);
+
+  /** Access to environment variable and properties */
   @Autowired
   Environment env;
 
   @Bean
   MongoClientFactoryBean mongo() {
-
+    LOGGER.debug("Creating mongo client factory bean");
+    MongoClientFactoryBean mongo = new MongoClientFactoryBean();
+    mongo.setHost(env.getRequiredProperty("db.mongo.host"));
+    return mongo;
   }
+
 }
