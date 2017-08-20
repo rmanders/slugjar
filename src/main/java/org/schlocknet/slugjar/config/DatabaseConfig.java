@@ -1,5 +1,6 @@
 package org.schlocknet.slugjar.config;
 
+import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +10,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.core.MongoClientFactoryBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
  * Primary database configuration class
  */
 @Configuration
+@EnableMongoRepositories
 public class DatabaseConfig {
 
   /** Local logger */
@@ -29,6 +32,12 @@ public class DatabaseConfig {
     MongoClientFactoryBean mongo = new MongoClientFactoryBean();
     mongo.setHost(env.getRequiredProperty("db.mongo.host"));
     return mongo;
+  }
+
+  @Bean
+  MongoTemplate mongoTemplate(Mongo mongo) {
+    LOGGER.debug("Creating MongoTemplate");
+    return new MongoTemplate(mongo, env.getProperty("db.mongo.database", "slugjar"));
   }
 
 }
