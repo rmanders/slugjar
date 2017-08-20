@@ -16,7 +16,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
  * Primary database configuration class
  */
 @Configuration
-@EnableMongoRepositories
+@EnableMongoRepositories(basePackages = {"org.schlocknet.slugjar.dao"})
 public class DatabaseConfig {
 
   /** Local logger */

@@ -17,4 +17,8 @@ public class UserDetails extends User {
 
   private String salt;
 
+  public User toUser() {
+    return (User) this;
+  }
+
 }
