@@ -24,11 +24,11 @@ public class BlogController {
   BlogPostDao blogPostDao;
 
   @RequestMapping(method= RequestMethod.POST, consumes = "application/json", produces="application/json")
-  public ApiResponse<String> makeNewPost(
+  public ApiResponse makeNewPost(
       @RequestBody BlogPost blogPost,
       HttpServletResponse response ) {
     LOGGER.info("Got request to post new blog entry");
     blogPostDao.save(blogPost);
-    return new ApiResponse<String>("success");
+    return new ApiResponse("success");
   }
 }

@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Configuration
@@ -16,11 +17,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf().disable()
+            .exceptionHandling().and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+            .cors().and()
             .authorizeRequests()
-            .antMatchers("/").permitAll()
-            .antMatchers("/info").permitAll()
-            .antMatchers(HttpMethod.POST, "/api/user/login").permitAll()
-            .anyRequest().authenticated();
+            .antMatchers(
+                HttpMethod.GET,
+                "/",
+                "/*.html",
+                "/favicon.ico",
+                "/**/*.html",
+                "/**/*.css",
+                "/**/*.js",
+                "/info*",
+                "/api/**/*"
+            ).permitAll()
+            .antMatchers(HttpMethod.POST, "/api/user/login").permitAll();
+            //.anyRequest().authenticated();
+
+        http
+            .headers()
+            .cacheControl();
     }
 
   @Override
