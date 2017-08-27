@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.core.MongoClientFactoryBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
  * Primary database configuration class
@@ -38,6 +40,17 @@ public class DatabaseConfig {
   MongoTemplate mongoTemplate(Mongo mongo) {
     LOGGER.debug("Creating MongoTemplate");
     return new MongoTemplate(mongo, env.getProperty("db.mongo.database", "slugjar"));
+  }
+
+  /** Used for validating MongoDB documents */
+  @Bean
+  public ValidatingMongoEventListener validatingMongoEventListener() {
+    return new ValidatingMongoEventListener(mongoValidator());
+  }
+
+  @Bean
+  public LocalValidatorFactoryBean mongoValidator() {
+    return new LocalValidatorFactoryBean();
   }
 
 }

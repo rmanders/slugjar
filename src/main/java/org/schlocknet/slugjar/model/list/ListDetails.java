@@ -1,20 +1,24 @@
 package org.schlocknet.slugjar.model.list;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Document(collection="lists")
-public class ListDetails extends ListContainer {
+public class ListDetails  {
 
-  @DBRef(lazy = true)
-  private List<ListItem> listItems = Collections.emptyList();
+  @Id
+  private UUID listId = UUID.randomUUID();
 
-  public ListDetails() {
-    super();
-  }
+  private String listName;
+
+  private String listDescription;
+
+  private String listOwner;
 }
