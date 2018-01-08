@@ -8,6 +8,7 @@ import org.schlocknet.slugjar.dao.ListItemDao;
 import org.schlocknet.slugjar.model.list.ListDetails;
 import org.schlocknet.slugjar.model.list.ListItem;
 import org.schlocknet.slugjar.model.response.ApiResponse;
+import org.schlocknet.slugjar.model.response.ApiResponseStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class ListController {
       listDetails.setListId(UUID.randomUUID());
     }
     listDao.save(listDetails);
-    return new ApiResponse("success");
+    return new ApiResponse(ApiResponseStatus.SUCCEEDED);
   }
 
   @RequestMapping(value="/{listId}", method=RequestMethod.POST, consumes="application/json", produces="application/json")
@@ -63,7 +64,7 @@ public class ListController {
     }
 
     listItemDao.save(listItems);
-    return new ApiResponse("success");
+    return new ApiResponse(ApiResponseStatus.SUCCEEDED);
   }
 
   @RequestMapping(value="/{listId}", method=RequestMethod.GET, produces="application/json")

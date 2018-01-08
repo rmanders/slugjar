@@ -1,7 +1,7 @@
 package org.schlocknet.slugjar.controller;
 
 import org.schlocknet.slugjar.dao.UserDao;
-import org.schlocknet.slugjar.model.User;
+import org.schlocknet.slugjar.model.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +22,10 @@ public class UserController {
   private UserDao userDao;
 
   @RequestMapping(value="/listall", method= RequestMethod.GET, produces="application/json")
-  public List<User> listUsers() {
+  public List<UserInfo> listUsers() {
     LOGGER.debug("Got request to list all users");
 
-    return (List<User>)(List<?>)userDao.findAll();
+    return (List<UserInfo>)(List<?>)userDao.findAll();
   }
 
 }

@@ -3,6 +3,7 @@ package org.schlocknet.slugjar.controller;
 import org.schlocknet.slugjar.dao.NestedListDao;
 import org.schlocknet.slugjar.model.list.NestedList;
 import org.schlocknet.slugjar.model.response.ApiResponse;
+import org.schlocknet.slugjar.model.response.ApiResponseStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class NestedListController {
 
     nestedList.setListId(UUID.randomUUID());
     nestedListDao.insert(nestedList);
-    return new ApiResponse("success", nestedList.getListId().toString());
+    return new ApiResponse(ApiResponseStatus.SUCCEEDED, nestedList.getListId().toString());
   }
 
   @RequestMapping(value="/{listId}", method= RequestMethod.GET)
@@ -52,18 +53,18 @@ public class NestedListController {
     if (!Objects.equals(listId, nestedList.getListId())) {
       LOGGER.warn("nestedList listId path variable and object value mismatch: {} != {}", listId, nestedList.getListId());
       response.setStatus(HttpStatus.BAD_REQUEST.value());
-      return new ApiResponse("failed", "request body listId does not match URL listId");
+      return new ApiResponse(ApiResponseStatus.FAILED, "request body listId does not match URL listId");
     }
 
     nestedListDao.save(nestedList);
-    return new ApiResponse("success");
+    return new ApiResponse(ApiResponseStatus.SUCCEEDED);
   }
 
   @RequestMapping(value="/{listId}", method= RequestMethod.DELETE)
   public ApiResponse deleteNestedList(@PathVariable UUID listId) {
     LOGGER.debug("Got request to delete nested list with listId: {}", listId);
     nestedListDao.delete(listId);
-    return new ApiResponse("success");
+    return new ApiResponse(ApiResponseStatus.SUCCEEDED);
   }
 
 }

@@ -3,6 +3,7 @@ package org.schlocknet.slugjar.controller;
 import org.schlocknet.slugjar.dao.BlogPostDao;
 import org.schlocknet.slugjar.model.blog.BlogPost;
 import org.schlocknet.slugjar.model.response.ApiResponse;
+import org.schlocknet.slugjar.model.response.ApiResponseStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,6 @@ public class BlogController {
       HttpServletResponse response ) {
     LOGGER.info("Got request to post new blog entry");
     blogPostDao.save(blogPost);
-    return new ApiResponse("success");
+    return new ApiResponse(ApiResponseStatus.SUCCEEDED);
   }
 }

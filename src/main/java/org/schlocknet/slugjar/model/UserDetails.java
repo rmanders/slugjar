@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document
 @EqualsAndHashCode(callSuper=true)
-public class UserDetails extends User {
+public class UserDetails extends UserInfo {
 
   public UserDetails() {
     super();
@@ -17,8 +17,12 @@ public class UserDetails extends User {
 
   private String salt;
 
-  public User toUser() {
-    return (User) this;
+  public UserInfo toUserInfo() {
+    return new UserInfo(
+        this.getUserId(),
+        this.getUsername(),
+        this.getRoles()
+    );
   }
 
 }
