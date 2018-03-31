@@ -34,7 +34,7 @@ public class JWTConfig {
    */
   @Bean
    public JwtService jwtService() {
-    LOGGER.debug("Start JWT Service...");
+    LOGGER.debug("Starting JWT Service...");
     return new JwtServiceImpl(env.getRequiredProperty("jwt.secret"));
    }
 }
