@@ -3,29 +3,31 @@ spring:
   application:
     name: slugjar
   profiles:
-    active: local
+    active: dev
 server:
   context-path: '/'
-  port: 8081
+  port: 8080
 
 ---
 
 # ====================================== L O C A L =====================================================================
 
 spring:
-  profiles: local
-db:
-  source: mongo
-  mongo:
-    host: localhost
-    database: slugjar
+  profiles: dev
+database:
+  type: nitrite-db
+  filePath: "./slugjar.db.no2"
+  username: slugjar-user
+  password: chamgeme
+jwt:
+  secret: thequickbrownfoxjumpedoverthelazydog
 
 ---
 
 # ====================================== P R O D U C T I O N ===========================================================
 
 spring:
-  profiles: local
+  profiles: prod
 db:
   source: mongo
   mongo:

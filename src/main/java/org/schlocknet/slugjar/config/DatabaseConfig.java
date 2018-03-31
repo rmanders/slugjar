@@ -17,18 +17,18 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 /**
  * Primary database configuration class
  */
-@Configuration
-@EnableMongoRepositories(basePackages = {"org.schlocknet.slugjar.dao"})
+//@Configuration
+//@EnableMongoRepositories(basePackages = {"org.schlocknet.slugjar.dao"})
 public class DatabaseConfig {
 
   /** Local logger */
   private static Logger LOGGER = LoggerFactory.getLogger(DatabaseConfig.class);
 
   /** Access to environment variable and properties */
-  @Autowired
+  //@Autowired
   Environment env;
 
-  @Bean
+  //@Bean
   MongoClientFactoryBean mongo() {
     LOGGER.debug("Creating mongo client factory bean");
     MongoClientFactoryBean mongo = new MongoClientFactoryBean();
@@ -36,19 +36,19 @@ public class DatabaseConfig {
     return mongo;
   }
 
-  @Bean
+  //@Bean
   MongoTemplate mongoTemplate(Mongo mongo) {
     LOGGER.debug("Creating MongoTemplate");
     return new MongoTemplate(mongo, env.getProperty("db.mongo.database", "slugjar"));
   }
 
   /** Used for validating MongoDB documents */
-  @Bean
+  //@Bean
   public ValidatingMongoEventListener validatingMongoEventListener() {
     return new ValidatingMongoEventListener(mongoValidator());
   }
 
-  @Bean
+  //@Bean
   public LocalValidatorFactoryBean mongoValidator() {
     return new LocalValidatorFactoryBean();
   }

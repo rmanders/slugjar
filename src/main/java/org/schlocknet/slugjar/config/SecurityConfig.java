@@ -9,8 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-//@Configuration
-//@EnableWebSecurity
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -18,8 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .exceptionHandling().and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .cors().and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().cors().disable()
             .authorizeRequests()
             .antMatchers(
                 HttpMethod.GET,
