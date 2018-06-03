@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
   mode: 'development',
@@ -17,25 +18,42 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
+    new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       title: 'Slugjar Blog',
       template: 'index.html'
     })
   ],
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['*', '.js', '.vue', '.json']
+  },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          'vue-style-loader',
           'css-loader'
         ]
       },
       {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
+        test: /.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
       }
     ]
   }
