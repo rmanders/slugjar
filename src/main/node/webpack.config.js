@@ -14,7 +14,8 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    port: 8081
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
