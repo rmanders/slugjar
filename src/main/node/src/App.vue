@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>{{ message }} </h1>
-    <BlogEntry/>
+    <BlogEntry title="test title" entryDate="2018-06-20" contents="This is a test entry"/>
   </div>
 </template>
 

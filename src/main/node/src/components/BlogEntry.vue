@@ -1,21 +1,19 @@
 <template>
   <div class="blog-entry">
-    <span>{{ entryTitle }}</span>
+    <span>{{ title }}</span>
     <span>{{ entryDate }}</span>
     <div>
-      {{ entryText }}
+      {{ contents }}
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    data() {
-      return {
-        entryTitle: '<title here>',
-        entryDate: '<entry date>',
-        entryText: '<blog text>'
-      }
-    }
+    props: [
+      'title',
+      'entryDate',
+      'contents'
+    ]
   }
 </script>
