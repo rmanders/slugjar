@@ -16,3 +16,5 @@ hs_err_pid*
 build/
 *node_modules/
 src/main/node/dist/
+
+*.log

@@ -1,19 +1,15 @@
 <template>
   <div class="blog-entry">
-    <span>{{ title }}</span>
-    <span>{{ entryDate }}</span>
+    <span>{{ post.title }}</span>
+    <span>{{ post.dateCreated }}</span>
     <div>
-      {{ contents }}
+      {{ post.contents }}
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    props: [
-      'title',
-      'entryDate',
-      'contents'
-    ]
+    props: ['post']
   }
 </script>

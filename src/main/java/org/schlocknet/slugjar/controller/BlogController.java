@@ -39,6 +39,7 @@ public class BlogController {
     return new ApiResponse(ApiResponseStatus.SUCCEEDED);
   }
 
+  //@CrossOrigin(origins = "http://localhost:8081")
   @RequestMapping(method=RequestMethod.GET, produces = "application/json")
   public List<BlogPost> getBlogPosts(
       @RequestParam(value = "beginDate", defaultValue = "0") long beginDate,
