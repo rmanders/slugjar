@@ -13,12 +13,13 @@ import org.springframework.core.env.Environment;
  * Configuration class for JSON web token service
  */
 @Configuration
-public class JWTConfig {
+public class JwtConfig
+{
 
   /**
    * Local logger instance
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(JWTConfig.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(JwtConfig.class);
 
   /**
    * Access to environmental properties
