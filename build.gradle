@@ -17,6 +17,10 @@ buildscript {
   }
 }
 
+plugins {
+  id "com.moowork.node" version "1.2.0"
+}
+
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
@@ -58,6 +62,12 @@ dependencies {
 }
 
 jar {
+
+  //dependsOn(':frontend:build')
+  into('public') {
+    from "${projectDir}/src/main/node/dist"
+  }
+
   archiveName = "${artifactId}.jar"
   baseName = "${artifactId}"
   version = "${version}"
@@ -72,6 +82,9 @@ jar {
     )
   }
 }
+node {
+  nodeModulesDir = file("${project.projectDir}/src/main/node")
+}
 
 test {
   jacoco {
@@ -84,6 +97,11 @@ test {
 task wrapper(type: Wrapper) {
   gradleVersion = '4.0.2'
 }
+
+//clean.dependsOn npm_run_clean
+
+build.dependsOn npm_run_build
+
 compileKotlin {
   kotlinOptions {
     jvmTarget = "1.8"
