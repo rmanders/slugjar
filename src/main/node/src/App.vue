@@ -6,14 +6,14 @@
             v-bind:key="post.slug"
             v-bind:post="post"
     ></BlogEntry>
-    <div>
-      {{ posts }}
-    </div>
+    <mdeditor></mdeditor>
   </div>
 </template>
 
 <script>
 import BlogEntry from './components/BlogEntry.vue'
+import mdeditor from './components/md-editor.vue'
+
 import axios from 'axios'
 
 export default {
@@ -25,7 +25,8 @@ export default {
     }
   },
   components: {
-    BlogEntry
+    BlogEntry,
+    mdeditor
   },
   mounted() {
     axios
